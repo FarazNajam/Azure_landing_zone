@@ -29,9 +29,45 @@ variable "os_type" {
   default = "Linux" # or "Windows"
 }
 
-variable "virtual_network_name" {
-  description = "Name of the Key Vault (must be globally unique)."
+variable "hub_virtual_network_name" {
+  description = "Name of the hub VNet."
   type        = string
+  default     = vnet-hub-prod
+}
+
+variable "hub_NSG_name" {
+  description = "Name of the NSG associated with subnet1."
+  type        = string
+}
+
+variable "Azure_Firewall_Subnet" {
+  description = "Name of Firewall subnet."
+  type        = string
+  default     = AzureFirewallSubnet
+}
+
+variable "Azure_Firewall_Management_Subnet" {
+  description = "Name of Firewall Mgmt subnet."
+  type        = string
+  default     = AzureFirewallManagementSubnet
+}
+
+variable "address_space" {
+  description = "Namae of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+variable "address_prefix" {
+  description = "Name of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+############################################################################
+
+variable "spoke_app_virtual_network_name" {
+  description = "Name of the spoke app VNet."
+  type        = string
+  default     = vnet-spoke-app-prod
 }
 
 variable "NSG_name" {
@@ -53,4 +89,64 @@ variable "address_prefix" {
   description = "Name of the resource group where the Key Vault will be created."
   type        = list(string)
 }
+
+#############################################################################
+
+variable "spoke_data_virtual_network_name" {
+  description = "Name of the spoke data VNet."
+  type        = string
+  default     = vnet-spoke-data-prod
+}
+
+variable "NSG_name" {
+  description = "Name of the NSG associated with subnet1."
+  type        = string
+}
+
+variable "subnet1" {
+  description = "Name of subnet1."
+  type        = string
+}
+
+variable "address_space" {
+  description = "Namae of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+variable "address_prefix" {
+  description = "Name of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+##########################################################################
+
+variable "spoke_mgmt_virtual_network_name" {
+  description = "Name of the mgmt data VNet."
+  type        = string
+  default     = vnet-spoke-mgmt-prod
+}
+
+variable "NSG_name" {
+  description = "Name of the NSG associated with subnet1."
+  type        = string
+}
+
+variable "subnet1" {
+  description = "Name of subnet1."
+  type        = string
+}
+
+variable "address_space" {
+  description = "Namae of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+variable "address_prefix" {
+  description = "Name of the resource group where the Key Vault will be created."
+  type        = list(string)
+}
+
+########################################################################
+
+
 
