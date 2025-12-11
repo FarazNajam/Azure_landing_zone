@@ -3,7 +3,7 @@
     resource_group_name  = "rg-terraform-state-file-prod-01"
     storage_account_name = "terraformstatefileprod02"
     container_name       = "tfstate"
-    key                  = "keyvault/dev.tfstate"
+    key                  = "dev.tfstate"
 
     # Use Entra ID + OIDC from GitHub
     use_azuread_auth = true
