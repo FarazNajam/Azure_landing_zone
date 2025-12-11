@@ -34,70 +34,70 @@ variable "os_type" {
 variable "hub_virtual_network_name" {
   description = "Name of the hub VNet."
   type        = string
-  default     = vnet-hub-prod
+  default     = "vnet-hub-prod"
 }
 
 variable "hub_NSG_name" {
   description = "Name of the NSG associated with subnet1."
   type        = string
-  default     = hub_NGS_name
+  default     = "hub_NGS_name"
 }
 
 variable "hub_vnet_address_space" {
   type        = list(string)
-  default     = "[10.0.0.0/16]" 
+  default     = ["10.0.0.0/16"] 
 }
 
 variable "Azure_Firewall_Subnet" {
   description = "Name of Firewall subnet."
   type        = string
-  default     = AzureFirewallSubnet
+  default     = "AzureFirewallSubnet"
 }
 
 variable "AzureFirewallSubnet_address_prefix" {
   type        = list(string)
-  default     = "[10.0.1.0/24]"
+  default     = ["10.0.1.0/24"]
 }
 
 variable "Azure_Firewall_Management_Subnet" {
   description = "Name of Firewall Mgmt subnet."
   type        = string
-  default     = AzureFirewallManagementSubnet
+  default     = "AzureFirewallManagementSubnet"
 }
 
 variable "AzureFirewallSubnet_address_prefix" {
   type        = list(string)
-  default     = "[10.0.2.0/24]"
+  default     = ["10.0.2.0/24"]
 }
 
 variable "Gateway_Subnet" {
   type        = string
-  default     = GatewaySubnet
+  default     = "GatewaySubnet"
 }
 
 variable "Gateway_Subnet_address_prefix" {
   type        = list(string)
-  default     = "[10.0.10.0/27]"
+  default     = ["10.0.10.0/27"]
 }
 
 variable "Azure_Bastion_Subnet" {
   type        = string
-  default     = AzureBastionSubnet
+  default     = "AzureBastionSubnet"
 }
 
 variable "Azure_Bastion_Subnet_address_prefix" {
   type        = list(string)
-  default     = "[10.0.20.0/27]"
+  default     = ["10.0.20.0/27"]
 }
 
 variable "snet_shared_services_Subnet" {
   type        = string
-  default     = snet-shared-services
+  default     = "snet-shared-services"
 }
 
 variable "snet-shared-services_address_prefix" {
   type        = list(string)
-  default     = "[10.0.30.0/24]"
+  default     = ["10.0.30.0/24"]
 }
 
 ############################################################################
@@ -105,7 +105,7 @@ variable "snet-shared-services_address_prefix" {
 variable "spoke_app_virtual_network_name" {
   description = "Name of the spoke app VNet."
   type        = string
-  default     = vnet-spoke-app-prod
+  default     = "vnet-spoke-app-prod"
 }
 
 variable "NSG_name" {
@@ -133,7 +133,7 @@ variable "address_prefix" {
 variable "spoke_data_virtual_network_name" {
   description = "Name of the spoke data VNet."
   type        = string
-  default     = vnet-spoke-data-prod
+  default     = "vnet-spoke-data-prod"
 }
 
 variable "NSG_name" {
@@ -161,7 +161,7 @@ variable "address_prefix" {
 variable "spoke_mgmt_virtual_network_name" {
   description = "Name of the mgmt data VNet."
   type        = string
-  default     = vnet-spoke-mgmt-prod
+  default     = "vnet-spoke-mgmt-prod"
 }
 
 variable "NSG_name" {
