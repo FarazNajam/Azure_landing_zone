@@ -29,6 +29,8 @@ variable "os_type" {
   default = "Linux" # or "Windows"
 }
 
+################################################################
+
 variable "hub_virtual_network_name" {
   description = "Name of the hub VNet."
   type        = string
@@ -38,6 +40,12 @@ variable "hub_virtual_network_name" {
 variable "hub_NSG_name" {
   description = "Name of the NSG associated with subnet1."
   type        = string
+  default     = hub_NGS_name
+}
+
+variable "hub_vnet_address_space" {
+  type        = list(string)
+  default     = "[10.0.0.0/16]" 
 }
 
 variable "Azure_Firewall_Subnet" {
@@ -46,20 +54,50 @@ variable "Azure_Firewall_Subnet" {
   default     = AzureFirewallSubnet
 }
 
+variable "AzureFirewallSubnet_address_prefix" {
+  type        = list(string)
+  default     = "[10.0.1.0/24]"
+}
+
 variable "Azure_Firewall_Management_Subnet" {
   description = "Name of Firewall Mgmt subnet."
   type        = string
   default     = AzureFirewallManagementSubnet
 }
 
-variable "address_space" {
-  description = "Namae of the resource group where the Key Vault will be created."
+variable "AzureFirewallSubnet_address_prefix" {
   type        = list(string)
+  default     = "[10.0.2.0/24]"
 }
 
-variable "address_prefix" {
-  description = "Name of the resource group where the Key Vault will be created."
+variable "Gateway_Subnet" {
+  type        = string
+  default     = GatewaySubnet
+}
+
+variable "Gateway_Subnet_address_prefix" {
   type        = list(string)
+  default     = "[10.0.10.0/27]"
+}
+
+variable "Azure_Bastion_Subnet" {
+  type        = string
+  default     = AzureBastionSubnet
+}
+
+variable "Azure_Bastion_Subnet_address_prefix" {
+  type        = list(string)
+  default     = "[10.0.20.0/27]"
+}
+
+variable "snet_shared_services_Subnet" {
+  type        = string
+  default     = snet-shared-services
+}
+
+variable "snet-shared-services_address_prefix" {
+  type        = list(string)
+  default     = "[10.0.30.0/24]"
 }
 
 ############################################################################
