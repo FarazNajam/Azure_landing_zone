@@ -1,7 +1,7 @@
 # Backend: Azure Storage (remote state)
   backend "azurerm" {
     resource_group_name  = "rg-terraform-state-file-prod-01"
-    storage_account_name = "terraformstatefileprod01"
+    storage_account_name = "terraformstatefileprod02"
     container_name       = "tfstate"
     key                  = "keyvault/dev.tfstate"
 
