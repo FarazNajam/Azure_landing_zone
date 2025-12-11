@@ -1,19 +1,3 @@
-# Backend: Azure Storage (remote state)
-  backend "azurerm" {
-    resource_group_name  = "rg-terraform-state-file-prod-01"
-    storage_account_name = "terraformstatefileprod02"
-    container_name       = "tfstate"
-    key                  = "dev.tfstate"
-
-    # Use Entra ID + OIDC from GitHub
-    use_azuread_auth = true
-    use_oidc         = true
-  }
-
-provider "azurerm" {
-  features {}
-}
-
 # Get current tenant / object IDs (from the service principal)
 data "azurerm_client_config" "current" {}
 
