@@ -9,6 +9,17 @@ terraform {
       version = "=4.1.0"
     }
   }
+# Backend: Azure Storage (remote state)
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-state-file-prod-01"
+    storage_account_name = "terraformstatefileprod02"
+    container_name       = "tfstate"
+    key                  = "dev.tfstate"
+
+    # Use Entra ID + OIDC from GitHub
+    use_azuread_auth = true
+    use_oidc         = true
+  }
 }
 
 # Configure the Microsoft Azure Provider
