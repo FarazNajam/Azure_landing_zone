@@ -54,11 +54,6 @@ variable "Azure_Firewall_Subnet" {
   default     = "AzureFirewallSubnet"
 }
 
-variable "AzureFirewallSubnet_address_prefix" {
-  type        = list(string)
-  default     = ["10.0.1.0/24"]
-}
-
 variable "Azure_Firewall_Management_Subnet" {
   description = "Name of Firewall Mgmt subnet."
   type        = string
@@ -70,35 +65,13 @@ variable "AzureFirewallSubnet_address_prefix" {
   default     = ["10.0.2.0/24"]
 }
 
-variable "Gateway_Subnet" {
-  type        = string
-  default     = "GatewaySubnet"
+spokes = {
+  "vnet-spoke-app" = { address_space = ["10.1.0.0/16"] }
+  "vnet-spoke-db"  = { address_space = ["10.2.0.0/16"] }
 }
 
-variable "Gateway_Subnet_address_prefix" {
-  type        = list(string)
-  default     = ["10.0.10.0/27"]
-}
 
-variable "Azure_Bastion_Subnet" {
-  type        = string
-  default     = "AzureBastionSubnet"
-}
 
-variable "Azure_Bastion_Subnet_address_prefix" {
-  type        = list(string)
-  default     = ["10.0.20.0/27"]
-}
-
-variable "snet_shared_services_Subnet" {
-  type        = string
-  default     = "snet-shared-services"
-}
-
-variable "snet-shared-services_address_prefix" {
-  type        = list(string)
-  default     = ["10.0.30.0/24"]
-}
 
 ############################################################################
 
