@@ -1,14 +1,4 @@
-terraform {
-  required_version = ">= 1.6.0"
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 4.0"
-    }
-  }
-
-  # Backend: Azure Storage (remote state)
+# Backend: Azure Storage (remote state)
   backend "azurerm" {
     resource_group_name  = "rg-terraform-state-file-prod-01"
     storage_account_name = "terraformstatefileprod01"
