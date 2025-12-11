@@ -18,15 +18,31 @@ module "key_vault" {
   tenant_id           = data.azurerm_client_config.current.tenant_id
 }
 
-# Virtual Network Module
 module "virtual_network" {
   source = "./modules/Network"
 
-  virtual_network_name = var.virtual_network_name                      # must be globally unique
+  virtual_network_name = var.virtual_network_name
   location             = var.location
   resource_group_name  = var.resource_group_name
   NSG_name             = var.NSG_name
   address_space        = var.address_space
-  address_prefix       = var.address_prefix
-  subnet1              = var.subnet1
+
+  subnets = {
+    AzureFirewallSubnet = {
+      address_prefixes = ["10.0.1.0/24"]
+    }
+    AzureFirewallManagementSubnet = {
+      address_prefixes = ["10.0.2.0/24"]
+    }
+    GatewaySubnet = {
+      address_prefixes = ["10.0.10.0/27"]
+    }
+    AzureBastionSubnet = {
+      address_prefixes = ["10.0.20.0/27"]
+    }
+    snet-shared-services = {
+      address_prefixes = ["10.0.30.0/24"]
+    }
+  }
 }
+
