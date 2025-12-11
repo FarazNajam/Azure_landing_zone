@@ -18,8 +18,7 @@ variable "NSG_name" {
   type        = string
 }
 
-variable "subnet1" {
-  description = "Name of subnet1."
+variable "subnet" {
   type        = string
 }
 
