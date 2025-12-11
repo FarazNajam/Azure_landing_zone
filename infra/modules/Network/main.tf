@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "VNET01" {
   address_space       = var.address_space
 
   subnet {
-    name             = var.subnet1
+    name             = var.subnet
     address_prefixes = var.address_prefix
   }
 
