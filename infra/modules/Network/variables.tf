@@ -19,7 +19,9 @@ variable "NSG_name" {
 }
 
 variable "subnet" {
-  type        = string
+  type = map(object({
+    address_prefixes = list(string)
+  }))
 }
 
 variable "address_space" {
@@ -27,8 +29,4 @@ variable "address_space" {
   type        = list(string)
 }
 
-variable "address_prefix" {
-  description = "Name of the resource group where the Key Vault will be created."
-  type        = list(string)
-}
 
