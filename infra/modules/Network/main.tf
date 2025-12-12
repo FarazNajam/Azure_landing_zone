@@ -23,4 +23,4 @@ resource "azurerm_subnet" "subnets" {
   tags = {
     environment = "Production"
   }
-}
+
