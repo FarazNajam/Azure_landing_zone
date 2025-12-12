@@ -50,7 +50,26 @@ variable "hub_subnets" {
 }
 
 ############################################################################
+variable "app_spoke_virtual_network_name" {
+  description = "Name of the hub VNet."
+  type        = string
+  default     = "vnet-hub-prod"
+}
 
+variable "app_spoke_NSG_name" {
+  description = "Name of the NSG associated with subnet1."
+  type        = string
+}
+
+variable "app_spoke_address_space" {
+  type        = list(string)
+}
+
+variable "app_spoke_subnets" {
+  type = map(object({
+    address_prefixes = list(string)
+  }))
+}
 
 
 #############################################################################
