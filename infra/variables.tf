@@ -48,6 +48,12 @@ variable "hub_vnet_address_space" {
   default     = ["10.0.0.0/16"] 
 }
 
+variable "hub_subnets" {
+  type = map(object({
+    address_prefixes = list(string)
+  }))
+}
+
 ############################################################################
 
 
