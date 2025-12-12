@@ -1,0 +1,32 @@
+name: Terraform force-unlock
+
+on:
+  workflow_dispatch:  # manual trigger
+
+jobs:
+  force-unlock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+
+      - name: Terraform force-unlock
+        run: |
+          cd infra  # <-- change to your Terraform dir
+
+          terraform init
+
+          # If using workspaces:
+          # terraform workspace select dev
+
+          terraform force-unlock a1b1d758-fcd1-d7d1-274b-6131138e5f9e
+        env:
+          # Put the same env vars you use in your normal TF workflow:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
