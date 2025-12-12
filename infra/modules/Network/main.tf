@@ -20,7 +20,4 @@ resource "azurerm_subnet" "subnets" {
   address_prefixes     = each.value.address_prefixes
 }
 
-  tags = {
-    environment = "Production"
-  }
 
