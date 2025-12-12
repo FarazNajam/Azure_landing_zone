@@ -18,7 +18,7 @@ variable "NSG_name" {
   type        = string
 }
 
-variable "subnet" {
+variable "subnets" {
   type = map(object({
     address_prefixes = list(string)
   }))
