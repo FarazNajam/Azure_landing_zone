@@ -26,5 +26,6 @@ module "virtual_network" {
   resource_group_name  = var.resource_group_name
   NSG_name             = var.NSG_name
   address_space        = var.address_space
+  subnets              = var.subnets
 }
 
