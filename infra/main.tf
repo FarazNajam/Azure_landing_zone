@@ -21,11 +21,11 @@ module "key_vault" {
 module "virtual_network" {
   source = "./modules/Network"
 
-  virtual_network_name = var.virtual_network_name
+  virtual_network_name = var.hub_virtual_network_name
   location             = var.location
   resource_group_name  = var.resource_group_name
-  NSG_name             = var.NSG_name
-  address_space        = var.address_space
-  subnets              = var.subnets
+  NSG_name             = var.hub_NSG_name
+  address_space        = var.hub_address_space
+  subnets              = var.hub_subnets
 }
 
