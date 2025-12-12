@@ -11,10 +11,13 @@ resource "azurerm_virtual_network" "VNET01" {
   resource_group_name = var.resource_group_name
   address_space       = var.address_space
 
-  subnet {
-    name             = var.subnet
-    address_prefixes = var.address_prefix
-  }
+resource "azurerm_subnet" "subnets" {
+  for_each             = var.subnets
+  name                 = each.key
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.VNET01.name
+  address_prefixes     = each.value.address_prefixes
+}
 
   tags = {
     environment = "Production"
