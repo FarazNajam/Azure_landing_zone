@@ -86,18 +86,8 @@ variable "NSG_name" {
   type        = string
 }
 
-variable "subnet1" {
-  description = "Name of subnet1."
-  type        = string
-}
-
-variable "address_space" {
+variable "hub_address_space" {
   description = "Namae of the resource group where the Key Vault will be created."
-  type        = list(string)
-}
-
-variable "address_prefix" {
-  description = "Name of the resource group where the Key Vault will be created."
   type        = list(string)
 }
 
