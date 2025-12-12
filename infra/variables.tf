@@ -43,7 +43,7 @@ variable "hub_NSG_name" {
   default     = "hub_NGS_name"
 }
 
-variable "hub_vnet_address_space" {
+variable "hub_address_space" {
   type        = list(string)
   default     = ["10.0.0.0/16"] 
 }
