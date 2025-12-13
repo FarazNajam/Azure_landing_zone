@@ -1,5 +1,6 @@
 resource_group_name      = "rg-vnet-hub-spoke-prod"
 web_app_name             = "web-homelab-dev"
+key_vault_name           = "KV-landingzone-prod-8531"
 location                 = "australiaeast"
 hub_virtual_network_name = "hub_virtual_network" # must be globally unique
 hub_NSG_name             = "hub-vnet-NSG-prod"
