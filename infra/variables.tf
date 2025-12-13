@@ -74,27 +74,6 @@ variable "app_spoke_subnets" {
 
 #############################################################################
 
-variable "data_spoke_virtual_network_name" {
-  description = "Name of the hub VNet."
-  type        = string
-  default     = "vnet-data-spoke-prod"
-}
-
-variable "data_spoke_NSG_name" {
-  description = "Name of the NSG associated with subnet1."
-  type        = string
-}
-
-variable "data_spoke_address_space" {
-  type        = list(string)
-}
-
-variable "data_spoke_subnets" {
-  type = map(object({
-    address_prefixes = list(string)
-  }))
-}
-
 ##########################################################################
 variable "data_spoke_virtual_network_name" {
   description = "Name of the hub VNet."
