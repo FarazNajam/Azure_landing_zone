@@ -1,4 +1,4 @@
-resource_group_name      = "rg-kv-dev-01"
+resource_group_name      = "rg-vnet-hub-spoke-prod"
 web_app_name             = "web-homelab-dev"
 location                 = "australiaeast"
 hub_virtual_network_name = "hub_virtual_network" # must be globally unique
