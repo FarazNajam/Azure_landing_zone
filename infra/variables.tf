@@ -9,20 +9,7 @@ variable "location" {
   description = "Location; defaults to RG location if null"
 }
 
-variable "name_prefix" {
-  type = string
-}
-
 variable "web_app_name" {
-  type = string
-}
-
-variable "sku_name" {
-  type        = string
-  description = "Plan SKU (F1/B1/P1v3 etc.)"
-}
-
-variable "os_type" {
   type = string
 }
 
