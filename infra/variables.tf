@@ -10,8 +10,8 @@ variable "location" {
 }
 
 variable "key_vault_name" {
-  type        = string
-  default     = "KV-landingzone-prod-8531"
+  type    = string
+  default = "KV-landingzone-prod-8531"
 }
 
 variable "web_app_name" {
@@ -21,14 +21,14 @@ variable "web_app_name" {
 ################################################################
 
 variable "hub_virtual_network_name" {
-  description = "Name of the hub VNet."
   type        = string
   default     = "vnet-hub-prod"
+  description = "Name of the hub VNet."
 }
 
 variable "hub_NSG_name" {
-  description = "Name of the NSG associated with subnet1."
   type        = string
+  description = "Name of the NSG associated with subnet1."
 }
 
 variable "hub_address_space" {
@@ -42,15 +42,16 @@ variable "hub_subnets" {
 }
 
 ############################################################################
+
 variable "app_spoke_virtual_network_name" {
-  description = "Name of the hub VNet."
   type        = string
   default     = "vnet-app-spoke-prod"
+  description = "Name of the app spoke VNet."
 }
 
 variable "app_spoke_NSG_name" {
-  description = "Name of the NSG associated with subnet1."
   type        = string
+  description = "Name of the NSG associated with subnet1."
 }
 
 variable "app_spoke_address_space" {
@@ -63,19 +64,17 @@ variable "app_spoke_subnets" {
   }))
 }
 
+############################################################################
 
-#############################################################################
-
-##########################################################################
 variable "data_spoke_virtual_network_name" {
-  description = "Name of the hub VNet."
   type        = string
-  default     = "vnet-hub-prod"
+  default     = "vnet-data-spoke-prod"
+  description = "Name of the data spoke VNet."
 }
 
 variable "data_spoke_NSG_name" {
-  description = "Name of the NSG associated with subnet1."
   type        = string
+  description = "Name of the NSG associated with subnet1."
 }
 
 variable "data_spoke_address_space" {
@@ -89,15 +88,16 @@ variable "data_spoke_subnets" {
 }
 
 ########################################################################
+
 variable "mgmt_spoke_virtual_network_name" {
-  description = "Name of the hub VNet."
   type        = string
   default     = "vnet-mgmt-spoke-prod"
+  description = "Name of the mgmt spoke VNet."
 }
 
 variable "mgmt_spoke_NSG_name" {
-  description = "Name of the NSG associated with subnet1."
   type        = string
+  description = "Name of the NSG associated with subnet1."
 }
 
 variable "mgmt_spoke_address_space" {
@@ -109,5 +109,3 @@ variable "mgmt_spoke_subnets" {
     address_prefixes = list(string)
   }))
 }
-
-
