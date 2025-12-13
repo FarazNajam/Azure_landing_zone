@@ -9,6 +9,12 @@ variable "location" {
   description = "Location; defaults to RG location if null"
 }
 
+variable "key_vault_name" {
+  type        = string
+  default     = "KV-landingzone-prod-8531"
+  description = "Location; defaults to RG location if null"
+}
+
 variable "web_app_name" {
   type = string
 }
