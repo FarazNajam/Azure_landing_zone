@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "rg" {
 module "key_vault" {
   source = "./modules/key_vault"
 
-  name                = "kv-dev-01-8531" # must be globally unique
+  name                = var.key_vault_name # must be globally unique
   location            = var.location
   resource_group_name = var.resource_group_name
   tenant_id           = data.azurerm_client_config.current.tenant_id
