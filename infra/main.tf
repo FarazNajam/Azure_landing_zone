@@ -1,13 +1,12 @@
 # Get current tenant / object IDs (from the service principal)
 data "azurerm_client_config" "current" {}
 
-# Example resource group for the Key Vault
-# (You can rename this to whatever convention you like)
-resource "azurerm_resource_group" "rg_kv" {
+# Resource group (shared for this env)
+resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
-  location = "australiaeast"
+  location = var.location
 }
-#
+
 # Key Vault module
 module "key_vault" {
   source = "./modules/key_vault"
@@ -19,8 +18,9 @@ module "key_vault" {
 }
 
 #######################################################################################
+# Hub VNet (central)
 
-module "app_spoke_virtual_network" {
+module "hub_virtual_network" {
   source = "./modules/Network"
 
   virtual_network_name = var.hub_virtual_network_name
@@ -31,9 +31,10 @@ module "app_spoke_virtual_network" {
   subnets              = var.hub_subnets
 }
 
-#########################################################################################
+#######################################################################################
+# App Spoke VNet
 
-module "virtual_network" {
+module "app_spoke_virtual_network" {
   source = "./modules/Network"
 
   virtual_network_name = var.app_spoke_virtual_network_name
@@ -43,5 +44,3 @@ module "virtual_network" {
   address_space        = var.app_spoke_address_space
   subnets              = var.app_spoke_subnets
 }
-
-####################################################################################
