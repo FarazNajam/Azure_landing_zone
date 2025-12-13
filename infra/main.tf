@@ -18,6 +18,8 @@ module "key_vault" {
   tenant_id           = data.azurerm_client_config.current.tenant_id
 }
 
+#######################################################################################
+
 module "virtual_network" {
   source = "./modules/Network"
 
@@ -28,6 +30,8 @@ module "virtual_network" {
   address_space        = var.hub_address_space
   subnets              = var.hub_subnets
 }
+
+#########################################################################################
 
 module "virtual_network" {
   source = "./modules/Network"
@@ -40,3 +44,4 @@ module "virtual_network" {
   subnets              = var.app_spoke_subnets
 }
 
+####################################################################################
