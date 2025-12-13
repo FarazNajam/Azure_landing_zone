@@ -1,6 +1,11 @@
 name: Terraform - Landing Zone Core
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - "infra/**"
+      - ".github/workflows/terraform.yml"
   pull_request:
     branches: ["main"]
     paths:
@@ -8,9 +13,14 @@ on:
       - ".github/workflows/terraform.yml"
   workflow_dispatch: {}
 
+# Prevent parallel runs fighting over the same tfstate lease (lock)
+concurrency:
+  group: terraform-${{ github.ref }}-infra
+  cancel-in-progress: true
+
 permissions:
   id-token: write
-  contents: write   # needed to push fmt fixes back
+  contents: read
 
 env:
   ARM_USE_OIDC: "true"
@@ -23,44 +33,8 @@ env:
   TF_CLI_ARGS: "-no-color"
 
 jobs:
-  fmt:
-    name: Auto-format Terraform (PR branches)
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: infra
-
-    steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.9.0"
-
-      - name: Terraform fmt (write)
-        run: terraform fmt -recursive
-
-      - name: Commit & push fmt changes (if any)
-        run: |
-          if git diff --quiet; then
-            echo "No formatting changes."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: terraform fmt"
-          git push
-
   terraform:
-    name: Terraform (init/validate/plan)
     runs-on: ubuntu-latest
-    needs: fmt
     defaults:
       run:
         working-directory: infra
@@ -75,7 +49,7 @@ jobs:
           terraform_version: "1.9.0"
 
       - name: Terraform fmt (check)
-        run: terraform fmt -check -recursive
+        run: terraform fmt -check -recursive -diff
 
       - name: Terraform init
         run: terraform init -upgrade
@@ -96,3 +70,7 @@ jobs:
         with:
           name: tfplan
           path: infra/tfplan
+
+      - name: Terraform apply (main branch only)
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: terraform apply -input=false -lock-timeout=5m -auto-approve "tfplan"
