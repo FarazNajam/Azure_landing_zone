@@ -20,7 +20,7 @@ module "key_vault" {
 
 #######################################################################################
 
-module "virtual_network" {
+module "app_spoke_virtual_network" {
   source = "./modules/Network"
 
   virtual_network_name = var.hub_virtual_network_name
