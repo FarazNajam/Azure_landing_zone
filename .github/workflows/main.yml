@@ -2,46 +2,74 @@ name: Terraform - Landing Zone Core
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths:
+      - "infra/**"
+      - ".github/workflows/terraform.yml"
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: ["main"]
+    paths:
+      - "infra/**"
+      - ".github/workflows/terraform.yml"
+  workflow_dispatch: {}
 
 permissions:
-  id-token: write      # required for OIDC
+  id-token: write   # required for OIDC
   contents: read
 
 env:
-  ARM_USE_OIDC: true
+  # AzureRM OIDC auth (Terraform Provider will use these)
+  ARM_USE_OIDC: "true"
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+  # Terraform non-interactive behavior (prevents hanging)
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  TF_CLI_ARGS: "-no-color"
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: infra
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.0
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.0"
 
-    - name: Terraform Init
-      run: terraform init
+      # Optional but strongly recommended in CI
+      - name: Terraform fmt (check)
+        run: terraform fmt -check -recursive
 
-    - name: Terraform Validate
-      run: terraform validate
+      - name: Terraform init
+        run: terraform init -upgrade
 
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan
+      - name: Terraform validate
+        run: terraform validate
 
-    - name: Terraform Apply (main branch only)
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-      run: terraform apply -auto-approve tfplan
+      - name: Terraform plan
+        run: |
+          terraform plan \
+            -input=false \
+            -lock-timeout=5m \
+            -var-file="dev.tfvars" \
+            -out="tfplan"
+
+      - name: Upload tfplan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: infra/tfplan
+
+      - name: Terraform apply (main branch only)
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: terraform apply -input=false -auto-approve "tfplan"
