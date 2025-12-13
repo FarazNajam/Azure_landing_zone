@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  type = string
+  type        = string
   description = "Existing RG to deploy into"
 }
 
@@ -18,12 +18,12 @@ variable "web_app_name" {
 }
 
 variable "sku_name" {
-  type    = string
+  type        = string
   description = "Plan SKU (F1/B1/P1v3 etc.)"
 }
 
 variable "os_type" {
-  type    = string
+  type = string
 }
 
 ################################################################
@@ -40,7 +40,7 @@ variable "hub_NSG_name" {
 }
 
 variable "hub_address_space" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "hub_subnets" {
@@ -62,7 +62,7 @@ variable "app_spoke_NSG_name" {
 }
 
 variable "app_spoke_address_space" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "app_spoke_subnets" {
@@ -87,7 +87,7 @@ variable "data_spoke_NSG_name" {
 }
 
 variable "data_spoke_address_space" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "data_spoke_subnets" {
@@ -109,7 +109,7 @@ variable "mgmt_spoke_NSG_name" {
 }
 
 variable "mgmt_spoke_address_space" {
-  type        = list(string)
+  type = list(string)
 }
 
 variable "mgmt_spoke_subnets" {

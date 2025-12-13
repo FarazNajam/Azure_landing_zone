@@ -1,9 +1,9 @@
-resource_group_name  ="rg-kv-dev-01"
-web_app_name         ="web-homelab-dev"
-location             ="australiaeast"
-hub_virtual_network_name ="hub_virtual_network"                    # must be globally unique
-hub_NSG_name             ="hub-vnet-NSG-prod"
-hub_address_space        =["10.1.0.0/16"]
+resource_group_name      = "rg-kv-dev-01"
+web_app_name             = "web-homelab-dev"
+location                 = "australiaeast"
+hub_virtual_network_name = "hub_virtual_network" # must be globally unique
+hub_NSG_name             = "hub-vnet-NSG-prod"
+hub_address_space        = ["10.1.0.0/16"]
 hub_subnets = {
   AzureFirewallSubnet = {
     address_prefixes = ["10.0.1.0/24"]
@@ -17,14 +17,14 @@ hub_subnets = {
   AzureBastionSubnet = {
     address_prefixes = ["10.0.20.0/27"]
   }
-  "snet-shared-services" = {        # key has a hyphen, so quote it
+  "snet-shared-services" = { # key has a hyphen, so quote it
     address_prefixes = ["10.0.30.0/24"]
   }
 }
 ################################################################################################################
-app_spoke_virtual_network_name ="app_spoke_virtual_network"                    # must be globally unique
-app_spoke_NSG_name             ="app-spoke-vnet-NSG-prod"
-app_spoke_address_space        =["10.1.0.0/16"]
+app_spoke_virtual_network_name = "app_spoke_virtual_network" # must be globally unique
+app_spoke_NSG_name             = "app-spoke-vnet-NSG-prod"
+app_spoke_address_space        = ["10.1.0.0/16"]
 app_spoke_subnets = {
   snet_web = {
     address_prefixes = ["10.1.1.0/24"]
@@ -35,9 +35,9 @@ app_spoke_subnets = {
 }
 
 ################################################################################################################
-data_spoke_virtual_network_name ="data_spoke_virtual_network"                    # must be globally unique
-data_spoke_NSG_name             ="data-spoke-vnet-NSG-prod"
-data_spoke_address_space        =["10.2.0.0/16"]
+data_spoke_virtual_network_name = "data_spoke_virtual_network" # must be globally unique
+data_spoke_NSG_name             = "data-spoke-vnet-NSG-prod"
+data_spoke_address_space        = ["10.2.0.0/16"]
 data_spoke_subnets = {
   snet_db = {
     address_prefixes = ["10.2.1.0/24"]
@@ -45,9 +45,9 @@ data_spoke_subnets = {
 }
 
 ################################################################################################################
-mgmt_spoke_virtual_network_name ="mgmt_spoke_virtual_network"                    # must be globally unique
-mgmt_spoke_NSG_name             ="mgmt-spoke-vnet-NSG-prod"
-mgmt_spoke_address_space        =["10.3.0.0/16"]
+mgmt_spoke_virtual_network_name = "mgmt_spoke_virtual_network" # must be globally unique
+mgmt_spoke_NSG_name             = "mgmt-spoke-vnet-NSG-prod"
+mgmt_spoke_address_space        = ["10.3.0.0/16"]
 mgmt_spoke_subnets = {
   snet_db = {
     address_prefixes = ["10.3.1.0/24"]

@@ -9,7 +9,7 @@ terraform {
       version = "=4.1.0"
     }
   }
-# Backend: Azure Storage (remote state)
+  # Backend: Azure Storage (remote state)
   backend "azurerm" {
     resource_group_name  = "rg-terraform-state-file-prod-01"
     storage_account_name = "terraformstatefileprod02"
