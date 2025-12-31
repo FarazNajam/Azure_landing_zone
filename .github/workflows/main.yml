@@ -25,6 +25,7 @@ env:
   TF_IN_AUTOMATION: "true"
   TF_INPUT: "false"
   ARM_USE_OIDC: "true"
+  TFVARS_FILE: "dev.tfvars"
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -78,8 +79,8 @@ jobs:
         run: terraform fmt -check -recursive -diff
 
       # -----------------------------
-      # Azure auth + init/validate/plan
-      # Only on push to main (secrets available)
+      # Azure auth + init/validate/plan/apply
+      # Only on push to main
       # -----------------------------
       - name: Azure Login (OIDC)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -99,4 +100,8 @@ jobs:
 
       - name: Terraform plan
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: terraform plan -input=false
+        run: terraform plan -input=false -var-file="${TFVARS_FILE}"
+
+      - name: Terraform apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -input=false -var-file="${TFVARS_FILE}"
