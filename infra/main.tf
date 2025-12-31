@@ -54,9 +54,9 @@ module "data_spoke_virtual_network" {
   virtual_network_name = var.data_spoke_virtual_network_name
   location             = var.location
   resource_group_name  = var.resource_group_name
-  NSG_name             = var.app_spoke_NSG_name
-  address_space        = var.app_spoke_address_space
-  subnets              = var.app_spoke_subnets
+  NSG_name             = var.data_spoke_NSG_name
+  address_space        = var.data_spoke_address_space
+  subnets              = var.data_spoke_subnets
 }
 
 #######################################################################################
@@ -68,7 +68,7 @@ module "mgmt_spoke_virtual_network" {
   virtual_network_name = var.mgmt_spoke_virtual_network_name
   location             = var.location
   resource_group_name  = var.resource_group_name
-  NSG_name             = var.app_spoke_NSG_name
-  address_space        = var.app_spoke_address_space
-  subnets              = var.app_spoke_subnets
+  NSG_name             = var.mgmt_spoke_NSG_name
+  address_space        = var.mgmt_spoke_address_space
+  subnets              = var.mgmt_spoke_subnets
 }
