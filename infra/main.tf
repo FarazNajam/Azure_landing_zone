@@ -76,7 +76,7 @@ module "mgmt_spoke_virtual_network" {
 #######################################################################################
 locals {
   spokes = {
-    app  = { vnet_id = module.app_spoke_virtual_network.vnet_id,  vnet_name = module.app_spoke_virtual_network.vnet_name,  rg = module.app_spoke_virtual_network.resource_group_name }
+    app  = { vnet_id = module.app_spoke_virtual_network.vnet_id, vnet_name = module.app_spoke_virtual_network.vnet_name, rg = module.app_spoke_virtual_network.resource_group_name }
     data = { vnet_id = module.data_spoke_virtual_network.vnet_id, vnet_name = module.data_spoke_virtual_network.vnet_name, rg = module.data_spoke_virtual_network.resource_group_name }
     mgmt = { vnet_id = module.mgmt_spoke_virtual_network.vnet_id, vnet_name = module.mgmt_spoke_virtual_network.vnet_name, rg = module.mgmt_spoke_virtual_network.resource_group_name }
   }

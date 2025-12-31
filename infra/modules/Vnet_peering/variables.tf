@@ -1,15 +1,15 @@
 variable "name" {
-  type        = string
+  type = string
 }
 
 variable "resource_group_name" {
-  type        = string
+  type = string
 }
 
 variable "virtual_network_name" {
-  type        = string
+  type = string
 }
 
 variable "remote_virtual_network_id" {
-  type        = string
+  type = string
 }
