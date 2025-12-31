@@ -40,7 +40,7 @@ data_spoke_virtual_network_name = "data_spoke_virtual_network" # must be globall
 data_spoke_NSG_name             = "data-spoke-vnet-NSG-prod"
 data_spoke_address_space        = ["10.2.0.0/16"]
 data_spoke_subnets = {
-  snet_db = {
+  snet_data = {
     address_prefixes = ["10.2.1.0/24"]
   }
 }
@@ -50,7 +50,7 @@ mgmt_spoke_virtual_network_name = "mgmt_spoke_virtual_network" # must be globall
 mgmt_spoke_NSG_name             = "mgmt-spoke-vnet-NSG-prod"
 mgmt_spoke_address_space        = ["10.3.0.0/16"]
 mgmt_spoke_subnets = {
-  snet_db = {
+  snet_mgmt = {
     address_prefixes = ["10.3.1.0/24"]
   }
 }
