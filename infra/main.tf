@@ -48,7 +48,7 @@ module "app_spoke_virtual_network" {
 #######################################################################################
 # Data Spoke VNet
 
-module "app_spoke_virtual_network" {
+module "data_spoke_virtual_network" {
   source = "./modules/Network"
 
   virtual_network_name = var.data_spoke_virtual_network_name
@@ -62,7 +62,7 @@ module "app_spoke_virtual_network" {
 #######################################################################################
 # Mgmt Spoke VNet
 
-module "app_spoke_virtual_network" {
+module "mgmt_spoke_virtual_network" {
   source = "./modules/Network"
 
   virtual_network_name = var.mgmt_spoke_virtual_network_name
