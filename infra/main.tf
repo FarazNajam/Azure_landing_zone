@@ -58,3 +58,17 @@ module "app_spoke_virtual_network" {
   address_space        = var.app_spoke_address_space
   subnets              = var.app_spoke_subnets
 }
+
+#######################################################################################
+# Mgmt Spoke VNet
+
+module "app_spoke_virtual_network" {
+  source = "./modules/Network"
+
+  virtual_network_name = var.mgmt_spoke_virtual_network_name
+  location             = var.location
+  resource_group_name  = var.resource_group_name
+  NSG_name             = var.app_spoke_NSG_name
+  address_space        = var.app_spoke_address_space
+  subnets              = var.app_spoke_subnets
+}
