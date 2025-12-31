@@ -13,7 +13,6 @@ on:
       - ".github/workflows/main.yml"
   workflow_dispatch: {}
 
-# Prevent parallel runs fighting over the same tfstate lease (lock)
 concurrency:
   group: terraform-${{ github.ref }}-infra
   cancel-in-progress: true
@@ -48,17 +47,8 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Optional (recommended) if you use OIDC to Azure
-      # If you don't use Azure login in this workflow, you can remove this step.
-      - name: Azure Login (OIDC)
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.ARM_CLIENT_ID }}
-          tenant-id: ${{ secrets.ARM_TENANT_ID }}
-          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-
       # -----------------------------
-      # Terraform fmt + auto-commit
+      # Terraform fmt
       # -----------------------------
       - name: Terraform fmt (apply)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
@@ -67,7 +57,6 @@ jobs:
       - name: Commit fmt changes (if any)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
         run: |
-          # Avoid infinite loops if the last commit was the fmt commit
           LAST_MSG="$(git log -1 --pretty=%B || true)"
           if [[ "$LAST_MSG" == "chore: terraform fmt" ]]; then
             echo "Last commit already a fmt commit; skipping."
@@ -84,25 +73,30 @@ jobs:
             echo "No formatting changes to commit"
           fi
 
-      # On PRs, just CHECK formatting (don’t auto-commit)
       - name: Terraform fmt (check)
         if: github.event_name == 'pull_request'
         run: terraform fmt -check -recursive -diff
 
       # -----------------------------
-      # Terraform init/validate/plan
+      # Azure auth + init/validate/plan
+      # Only on push to main (secrets available)
       # -----------------------------
+      - name: Azure Login (OIDC)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
       - name: Terraform init
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform init
 
       - name: Terraform validate
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform validate
 
       - name: Terraform plan
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform plan -input=false
-
-      # Optional apply (only on push to main)
-      # Uncomment when you're ready to auto-apply from CI.
-      # - name: Terraform apply
-      #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      #   run: terraform apply -auto-approve -input=false
