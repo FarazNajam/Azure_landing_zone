@@ -11,5 +11,5 @@ output "resource_group_name" {
 }
 
 output "subnet_id" {
-  value = var.resource_group_name
+  value = var.subnet_id
 }
