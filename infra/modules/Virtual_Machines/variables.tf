@@ -10,7 +10,7 @@ variable "location" {
 }
 
 variable "nic" {
-  type    = string
+  type = string
 }
 
 variable "VM_name" {
