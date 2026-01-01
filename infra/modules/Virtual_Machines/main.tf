@@ -5,7 +5,7 @@ resource "azurerm_network_interface" "VM01_nic" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = module.app_spoke_virtual_network.subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -14,7 +14,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = var.VM_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  size                = var.size
+  size                = var.VM_size
   admin_username      = "adminuser"
   admin_password      = "P@$$w0rd1234!"
   network_interface_ids = [
