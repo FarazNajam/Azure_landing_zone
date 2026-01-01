@@ -9,3 +9,7 @@ output "vnet_name" {
 output "resource_group_name" {
   value = var.resource_group_name
 }
+
+output "subnet_id" {
+  value = var.resource_group_name
+}
