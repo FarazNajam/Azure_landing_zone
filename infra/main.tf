@@ -108,12 +108,12 @@ module "peer_spokes_to_hub" {
 module "VM_01" {
   source = "./modules/Virtual_Machines"
 
-  nic                  = var.nic
-  location             = var.location
-  resource_group_name  = var.resource_group_name
-  subnet_id            = module.app_spoke_virtual_network.subnet.id
-  VM_name              = var.VM_name
-  VM_size              = var.VM_size
+  nic                 = var.nic
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = module.app_spoke_virtual_network.subnet.id
+  VM_name             = var.VM_name
+  VM_size             = var.VM_size
 }
 
 #######################################################################################
