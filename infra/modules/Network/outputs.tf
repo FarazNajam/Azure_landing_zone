@@ -10,6 +10,11 @@ output "resource_group_name" {
   value = var.resource_group_name
 }
 
-output "subnet_id" {
-  value = var.subnet_id
+output "subnet_ids" {
+  description = "Map of subnet names to subnet IDs"
+  value = {
+    for k, s in azurerm_subnet.subnets :
+    k => s.id
+  }
 }
+
