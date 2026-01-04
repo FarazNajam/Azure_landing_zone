@@ -111,7 +111,7 @@ module "VM_01" {
   nic                 = var.nic
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = module.app_spoke_virtual_network.subnet.id
+  subnet_id           = module.app_spoke_virtual_network.subnet_ids["snet-app"]
   VM_name             = var.VM_name
   VM_size             = var.VM_size
 }
