@@ -30,7 +30,7 @@ variable "address_space" {
 }
 
 variable "subnet_id" {
-  type        = string
+  type = string
 }
 
 
