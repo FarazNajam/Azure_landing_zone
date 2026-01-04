@@ -29,4 +29,8 @@ variable "address_space" {
   type        = list(string)
 }
 
+variable "subnet_id" {
+  type        = string
+}
+
 
