@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "displayName": "Allowed locations for resources",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Restricts resources to Australia East and Australia Southeast for data sovereignty",
+    "metadata": {
+      "category": "General",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "allowedLocations": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed locations",
+          "description": "The list of allowed locations for resources.",
+          "strongType": "location"
+        },
+        "defaultValue": [
+          "australiaeast",
+          "australiasoutheast"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "location",
+            "notIn": "[parameters('allowedLocations')]"
+          },
+          {
+            "field": "type",
+            "notEquals": "Microsoft.AzureActiveDirectory/b2cDirectories"
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
