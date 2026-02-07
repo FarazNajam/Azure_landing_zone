@@ -1,7 +1,4 @@
-cd ~/projects/contoso-landing-zone
 
-# Update main README
-cat > README.md << 'EOF'
 # Contoso Financial Services - Azure Landing Zone
 
 Enterprise-scale Azure landing zone implementation following Microsoft Cloud Adoption Framework (CAF), designed for a mid-sized financial services firm with APRA CPS 234 compliance requirements.
