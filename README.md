@@ -109,18 +109,18 @@ terraform apply
 
 ## 👥 Team
 
-- **Cloud Architect:** [Your Name]
+- **Cloud Architect:** Faraz Najam
 - **Platform Team:** 5 engineers
 - **Security:** 3 analysts
 - **Business Units:** 3 BU leads + 15+ developers
 
 ## 📞 Contact
 
-For questions or collaboration: [your-email@contoso.com]
+For questions or collaboration: faraz_najam@contoso.com
 
 ---
 **Status:** Week 1 Complete - Design Phase ✅  
-**Last Updated:** [Today's Date]
+**Last Updated:** 07/02/2026
 EOF
 
 # Commit all work
