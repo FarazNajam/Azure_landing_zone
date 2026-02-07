@@ -1,0 +1,57 @@
+{
+  "properties": {
+    "displayName": "Require specified tags on resources",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Enforces required tags: CostCenter, BusinessUnit, Environment, Owner, DataClassification",
+    "metadata": {
+      "category": "Tags",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "tagNames": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Tag Names",
+          "description": "List of tag names to require"
+        },
+        "defaultValue": [
+          "CostCenter",
+          "BusinessUnit",
+          "Environment",
+          "Owner",
+          "DataClassification"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "field": "[concat('tags[', parameters('tagNames')[0], ']')]",
+            "exists": "false"
+          },
+          {
+            "field": "[concat('tags[', parameters('tagNames')[1], ']')]",
+            "exists": "false"
+          },
+          {
+            "field": "[concat('tags[', parameters('tagNames')[2], ']')]",
+            "exists": "false"
+          },
+          {
+            "field": "[concat('tags[', parameters('tagNames')[3], ']')]",
+            "exists": "false"
+          },
+          {
+            "field": "[concat('tags[', parameters('tagNames')[4], ']')]",
+            "exists": "false"
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
