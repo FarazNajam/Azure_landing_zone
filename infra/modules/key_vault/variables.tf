@@ -17,3 +17,13 @@ variable "tenant_id" {
   description = "Azure AD tenant ID for the Key Vault."
   type        = string
 }
+
+variable "soft_delete_retention_days" {
+  type        = number
+}
+
+variable "purge_protection" {
+  type        = bool
+}
+
+

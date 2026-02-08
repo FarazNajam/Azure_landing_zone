@@ -5,7 +5,6 @@ variable "resource_group_name" {
 
 variable "location" {
   type        = string
-  default     = "australiaeast"
   description = "Location; defaults to RG location if null"
 }
 
@@ -18,5 +17,9 @@ variable "VM_name" {
 }
 
 variable "VM_size" {
+  type = string
+}
+
+variable "subnet_id" {
   type = string
 }

@@ -1,3 +1,7 @@
+variable "subscription_id" {
+  type = string
+}
+
 variable "resource_group_name" {
   type        = string
   description = "Existing RG to deploy into"
@@ -107,5 +111,40 @@ variable "mgmt_spoke_address_space" {
 variable "mgmt_spoke_subnets" {
   type = map(object({
     address_prefixes = list(string)
+  }))
+}
+
+############################################
+
+variable "vms" {
+  description = "Map of VMs and their configuration"
+  type = map(object({
+    nic     = string
+    VM_name = string
+    VM_size = string
+    subnet  = string
+  }))
+}
+
+variable "vnets" {
+  type = map(object({
+    virtual_network_name = string
+    NSG_name             = string
+    address_space        = list(string)
+    subnets              = map(object({
+      address_prefixes = list(string)
+    }))
+  }))
+}
+
+############################################
+
+variable "key_vaults" {
+  description = "A list of Key Vaults to be deployed"
+  type = map(object({
+    name    = string
+    enabled_for_disk_encryption = bool
+    soft_delete_retention_days = number
+    purge_protection = bool
   }))
 }

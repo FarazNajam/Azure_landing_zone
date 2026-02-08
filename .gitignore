@@ -1,0 +1,12 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.auto.tfvars
+terraform.tfvars
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

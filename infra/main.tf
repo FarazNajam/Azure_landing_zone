@@ -7,14 +7,18 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
+#######################################################################################
 # Key Vault module
 module "key_vault" {
   source = "./modules/key_vault"
 
-  name                = var.key_vault_name # must be globally unique
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  tenant_id           = data.azurerm_client_config.current.tenant_id
+  for_each                   = var.key_vaults
+  name                       = each.value.name # must be globally unique
+  location                   = var.location
+  resource_group_name        = var.resource_group_name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days = each.value.soft_delete_retention_days
+  purge_protection           = each.value.purge_protection 
 }
 
 #######################################################################################
@@ -32,47 +36,18 @@ module "hub_virtual_network" {
 }
 
 #######################################################################################
-# App Spoke VNet
-
-module "app_spoke_virtual_network" {
+module "spoke_virtual_networks" {
   source = "./modules/Network"
 
-  virtual_network_name = var.app_spoke_virtual_network_name
+  for_each = var.vnets
+
+  virtual_network_name = each.value.virtual_network_name
   location             = var.location
   resource_group_name  = var.resource_group_name
-  NSG_name             = var.app_spoke_NSG_name
-  address_space        = var.app_spoke_address_space
-  subnets              = var.app_spoke_subnets
+  NSG_name             = each.value.NSG_name
+  address_space        = each.value.address_space
+  subnets              = each.value.subnets
 }
-
-#######################################################################################
-# Data Spoke VNet
-
-module "data_spoke_virtual_network" {
-  source = "./modules/Network"
-
-  virtual_network_name = var.data_spoke_virtual_network_name
-  location             = var.location
-  resource_group_name  = var.resource_group_name
-  NSG_name             = var.data_spoke_NSG_name
-  address_space        = var.data_spoke_address_space
-  subnets              = var.data_spoke_subnets
-}
-
-#######################################################################################
-# Mgmt Spoke VNet
-
-module "mgmt_spoke_virtual_network" {
-  source = "./modules/Network"
-
-  virtual_network_name = var.mgmt_spoke_virtual_network_name
-  location             = var.location
-  resource_group_name  = var.resource_group_name
-  NSG_name             = var.mgmt_spoke_NSG_name
-  address_space        = var.mgmt_spoke_address_space
-  subnets              = var.mgmt_spoke_subnets
-}
-
 #######################################################################################
 locals {
   spokes = {
@@ -108,12 +83,17 @@ module "peer_spokes_to_hub" {
 module "VM_01" {
   source = "./modules/Virtual_Machines"
 
-  nic                 = var.nic
+  for_each = var.vms
+
+  nic                 = each.value.nic
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = module.app_spoke_virtual_network.subnet_ids["snet-app"]
-  VM_name             = var.VM_name
-  VM_size             = var.VM_size
+  subnet_id           = module.spoke_virtual_networks.subnet_ids[each.value.subnet]
+  VM_name             = each.value.VM_name
+  VM_size             = each.value.VM_size
 }
 
 #######################################################################################
+
+
+

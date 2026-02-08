@@ -16,6 +16,6 @@ resource "azurerm_key_vault" "this" {
   public_network_access_enabled = true
 
   # Reasonable defaults for lab use
-  soft_delete_retention_days = 7
-  purge_protection_enabled   = true
+  soft_delete_retention_days = var.soft_delete_retention_days
+  purge_protection_enabled   = var.purge_protection
 }
