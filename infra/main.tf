@@ -18,7 +18,7 @@ module "key_vault" {
   resource_group_name        = var.resource_group_name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days = each.value.soft_delete_retention_days
-  purge_protection           = each.value.purge_protection 
+  purge_protection           = each.value.purge_protection
 }
 
 #######################################################################################

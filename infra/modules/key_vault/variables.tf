@@ -19,11 +19,11 @@ variable "tenant_id" {
 }
 
 variable "soft_delete_retention_days" {
-  type        = number
+  type = number
 }
 
 variable "purge_protection" {
-  type        = bool
+  type = bool
 }
 
 

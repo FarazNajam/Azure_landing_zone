@@ -131,7 +131,7 @@ variable "vnets" {
     virtual_network_name = string
     NSG_name             = string
     address_space        = list(string)
-    subnets              = map(object({
+    subnets = map(object({
       address_prefixes = list(string)
     }))
   }))
@@ -142,9 +142,9 @@ variable "vnets" {
 variable "key_vaults" {
   description = "A list of Key Vaults to be deployed"
   type = map(object({
-    name    = string
+    name                        = string
     enabled_for_disk_encryption = bool
-    soft_delete_retention_days = number
-    purge_protection = bool
+    soft_delete_retention_days  = number
+    purge_protection            = bool
   }))
 }
