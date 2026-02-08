@@ -1,23 +1,23 @@
-subscription_id          = "553b9494-e357-471f-8b75-796409610ac1"
-resource_group_name      = "rg-vnet-hub-spoke-prod"
-web_app_name             = "web-homelab-dev"
+subscription_id     = "553b9494-e357-471f-8b75-796409610ac1"
+resource_group_name = "rg-vnet-hub-spoke-prod"
+web_app_name        = "web-homelab-dev"
 
 
 
 ################################################################################################################
 key_vaults = {
   "key_vault_01" = {
-    name     = "key_vault_01"
+    name                        = "key_vault_01"
     enabled_for_disk_encryption = false
-    soft_delete_retention_days = 7
-    purge_protection  = false
+    soft_delete_retention_days  = 7
+    purge_protection            = false
   }
 
   "key_vault_02" = {
-    name     = "key_vault_02"
+    name                        = "key_vault_02"
     enabled_for_disk_encryption = false
-    soft_delete_retention_days = 7
-    purge_protection  = false
+    soft_delete_retention_days  = 7
+    purge_protection            = false
   }
 }
 
@@ -93,8 +93,8 @@ vnets = {
     virtual_network_name = "mgmt_spoke_virtual_network"
     NSG_name             = "mgmt-spoke-NSG-01"
     address_space        = ["10.3.0.0/16"]
-    
-    subnets              = {
+
+    subnets = {
       snet_mgmt = {
         address_prefixes = ["10.3.1.0/24"]
       }
@@ -105,13 +105,13 @@ vnets = {
     virtual_network_name = "app_spoke_virtual_network"
     NSG_name             = "app-spoke-NSG-01"
     address_space        = ["10.1.0.0/16"]
-    
-    subnets              = {
+
+    subnets = {
       snet-app = {
-              address_prefixes = ["10.1.2.0/24"]
+        address_prefixes = ["10.1.2.0/24"]
       }
       snet_web = {
-              address_prefixes = ["10.1.1.0/24"]
+        address_prefixes = ["10.1.1.0/24"]
       }
     }
   }
@@ -120,11 +120,11 @@ vnets = {
     virtual_network_name = "data_spoke_virtual_network"
     NSG_name             = "data-spoke-NSG-01"
     address_space        = ["10.2.0.0/16"]
-    
-    subnets              = {
+
+    subnets = {
       snet-app = {
-              address_prefixes = ["10.2.1.0/24"]
+        address_prefixes = ["10.2.1.0/24"]
       }
-    }  
+    }
   }
 }
